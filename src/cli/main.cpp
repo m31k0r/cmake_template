@@ -1,5 +1,4 @@
 #include <fmt/format.h>
-#include <optional>
 
 #include <CLI/CLI.hpp>
 
@@ -7,18 +6,21 @@
 // configuration step. It creates a namespace called `myproject`. You can modify
 // the source template at `configured_files/config.hpp.in`.
 #include <internal_use_only/config.hpp>
-int main(int argc, const char **argv)
+int main(int argc, const char **argv) noexcept
 {
-  CLI::App app{ fmt::format("{} version {}", myproject::cmake::project_name, myproject::cmake::project_version) };
+  try {
+    CLI::App app{ fmt::format("{} version {}", myproject::cmake::PROJECT_NAME, myproject::cmake::PROJECT_VERSION) };
 
-  bool show_version = false;
-  app.add_flag("--version", show_version, "Show version information");
+    bool show_version = false;
+    app.add_flag("--version", show_version, "Show version information");
 
 
-  CLI11_PARSE(app, argc, argv);
-
-  if (show_version) {
-    fmt::print("{}\n", myproject::cmake::project_version);
-    return EXIT_SUCCESS;
+    CLI11_PARSE(app, argc, argv);
+    if (show_version) {
+      fmt::print("{}\n", myproject::cmake::PROJECT_VERSION);
+      return EXIT_SUCCESS;
+    }
+  } catch (...) {
+    return EXIT_FAILURE;
   }
 }
