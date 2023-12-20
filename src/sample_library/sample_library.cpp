@@ -1,12 +1,12 @@
 #include <myproject/sample_library.hpp>
-
-int factorial(int input) noexcept
+int add(int t_first, int t_second) noexcept { return t_first + t_second; }
+int factorial(int t_input) noexcept
 {
   int result = 1;
 
-  while (input > 0) {
-    result *= input;
-    --input;
+  while (t_input > 0) {
+    result *= t_input;
+    --t_input;
   }
 
   return result;
