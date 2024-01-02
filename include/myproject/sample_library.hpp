@@ -3,13 +3,15 @@
 
 #include <myproject/sample_library_export.hpp>
 
-[[nodiscard]] SAMPLE_LIBRARY_EXPORT int factorial(int) noexcept;
+[[nodiscard]] SAMPLE_LIBRARY_EXPORT int factorial(int /*t_input*/) noexcept;
 
-[[nodiscard]] constexpr int factorial_constexpr(int input) noexcept
+// Allow recursive functions
+// NOLINTNEXTLINE(misc-no-recursion)
+[[nodiscard]] constexpr int factorial_constexpr(int t_input) noexcept
 {
-  if (input == 0) { return 1; }
+  if (t_input == 0) { return 1; }
 
-  return input * factorial_constexpr(input - 1);
+  return t_input * factorial_constexpr(t_input - 1);
 }
 
 #endif

@@ -23,6 +23,7 @@ _ReSharper*
 *.log
 
 # OS Generated Files
+.cache
 .DS_Store
 .AppleDouble
 .LSOverride

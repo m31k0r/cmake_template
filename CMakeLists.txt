@@ -60,6 +60,16 @@ add_subdirectory(configured_files)
 # Adding the src:
 add_subdirectory(src)
 
+if(myproject_BUILD_PYBIND)
+  message(AUTHOR_WARNING "Building Python Bindings")
+  add_subdirectory(pybind) # for python binding generation (optional)
+endif()
+
+if(myproject_BUILD_CLI)
+  message(AUTHOR_WARNING "Building CLI")
+  add_subdirectory(cli) # for python binding generation (optional)
+endif()
+
 # Don't even look at tests if we're not top level
 if(NOT PROJECT_IS_TOP_LEVEL)
   return()
@@ -69,7 +79,7 @@ endif()
 include(CTest)
 
 if(BUILD_TESTING)
-  message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
+  message(AUTHOR_WARNING "Building Tests.")
   add_subdirectory(test)
 endif()
 
@@ -93,14 +103,14 @@ include(cmake/PackageProject.cmake)
 
 # Add other targets that you want installed here, by default we just package the one executable
 # we know we want to ship
-myproject_package_project(
-  TARGETS
-  intro
-  myproject_options
-  myproject_warnings
-  # FIXME: this does not work! CK
-  # PRIVATE_DEPENDENCIES_CONFIGURED project_options project_warnings
-)
+# myproject_package_project(
+#   TARGETS
+#   intro
+#   myproject_options
+#   myproject_warnings
+#   # FIXME: this does not work! CK
+#   # PRIVATE_DEPENDENCIES_CONFIGURED project_options project_warnings
+# )
 
 # Experience shows that explicit package naming can help make it easier to sort
 # out potential ABI related issues before they start, while helping you
