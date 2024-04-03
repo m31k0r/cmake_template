@@ -18,8 +18,8 @@ macro(myproject_supports_sanitizers)
 endmacro()
 
 macro(myproject_setup_options)
-  option(myproject_BUILD_PYBIND "Build python bindings" OFF)
-  option(myproject_BUILD_CLI "Build cli" OFF)
+  option(myproject_BUILD_PYBIND "Build python bindings" ON)
+  option(myproject_BUILD_CLI "Build cli" ON)
   option(myproject_ENABLE_HARDENING "Enable hardening" ON)
   option(myproject_ENABLE_COVERAGE "Enable coverage reporting" OFF)
   cmake_dependent_option(
